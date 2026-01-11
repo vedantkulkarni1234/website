@@ -19,7 +19,7 @@ export function CTASection() {
                 <div className="absolute inset-0 bg-grid-pattern bg-[size:50px_50px] opacity-30" />
             </div>
 
-            <div className="container relative mx-auto px-4 lg:px-8">
+            <div className="container relative mx-auto px-4 lg:px-8 py-16 lg:py-20">
                 <motion.div
                     initial={{ opacity: 0, y: 40 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -49,7 +49,7 @@ export function CTASection() {
                     </motion.div>
 
                     {/* Headline */}
-                    <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-6">
+                    <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-6 leading-tight">
                         Ready to{" "}
                         <GlitchText
                             text="Level Up"
@@ -62,7 +62,7 @@ export function CTASection() {
                     </h2>
 
                     {/* Subtext */}
-                    <p className="text-lg text-gray-400 max-w-2xl mx-auto mb-10">
+                    <p className="text-lg text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
                         Join thousands of elite security researchers who are finding
                         more bugs, faster, with HexStrike's powerful browser extensions.
                     </p>
@@ -92,7 +92,7 @@ export function CTASection() {
                     </div>
 
                     {/* Stats row */}
-                    <div className="flex flex-wrap justify-center gap-8 text-center">
+                    <div className="flex flex-wrap justify-center gap-8 lg:gap-12 text-center">
                         <motion.div
                             whileHover={{ scale: 1.1, y: -5 }}
                             transition={{ duration: 0.3 }}

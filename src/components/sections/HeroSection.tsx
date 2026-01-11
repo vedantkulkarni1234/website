@@ -3,8 +3,8 @@
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
-import { ArrowRight, ChevronDown, Sparkles } from "lucide-react";
-import { Button, GlitchText, Terminal, AnimatedBackground, FloatingOrbs } from "@/components/ui";
+import { ArrowRight, ChevronDown } from "lucide-react";
+import { Button, Terminal, AnimatedBackground, FloatingOrbs } from "@/components/ui";
 import { STATS } from "@/lib/constants";
 
 // Dynamically import 3D scene to avoid SSR issues
@@ -36,7 +36,7 @@ export function HeroSection() {
             <div className="aurora" />
 
             {/* Content */}
-            <div className="container relative z-20 px-4 lg:px-8 pt-24 pb-16">
+            <div className="container relative z-20 px-4 lg:px-8 py-20 lg:py-24">
                 <div className="max-w-5xl mx-auto text-center">
                     {/* Badge */}
                     <motion.div
@@ -56,7 +56,7 @@ export function HeroSection() {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
-                        className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] mb-6"
+                        className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6"
                     >
                         <span className="text-white">The </span>
                         <GlitchText
@@ -122,7 +122,7 @@ export function HeroSection() {
                         initial={{ opacity: 0, y: 40 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 1 }}
-                        className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mt-16 max-w-3xl mx-auto"
+                        className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6 mt-16 max-w-3xl mx-auto"
                     >
                         {STATS.map((stat, index) => (
                             <motion.div
@@ -131,7 +131,7 @@ export function HeroSection() {
                                 animate={{ opacity: 1, scale: 1 }}
                                 transition={{ duration: 0.4, delay: 1 + index * 0.1 }}
                                 whileHover={{ scale: 1.05, y: -5 }}
-                                className="group text-center p-6 bg-surface/60 backdrop-blur-md border border-cyan/20 rounded-2xl card-lift relative overflow-hidden"
+                                className="group text-center p-5 lg:p-6 bg-surface/60 backdrop-blur-md border border-cyan/20 rounded-2xl card-lift relative overflow-hidden"
                             >
                                 <div className="absolute inset-0 bg-gradient-to-br from-cyan/10 to-purple/10 opacity-0 group-hover:opacity-100 transition-opacity" />
                                 <div className="relative">

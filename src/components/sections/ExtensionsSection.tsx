@@ -47,7 +47,7 @@ function ExtensionCard({ extension, index }: ExtensionCardProps) {
                         transition={{ duration: 0.3 }}
                     />
 
-                    <CardContent className="p-6 relative">
+                    <CardContent className="p-5 lg:p-6 relative">
                         {/* Header */}
                         <div className="flex items-start justify-between mb-4">
                             <motion.div
@@ -72,7 +72,7 @@ function ExtensionCard({ extension, index }: ExtensionCardProps) {
                         </div>
 
                         {/* Title & Category */}
-                        <h3 className="text-lg font-bold text-white mb-1 group-hover:text-cyan transition-colors">
+                        <h3 className="text-lg font-bold text-white mb-1 group-hover:text-cyan transition-colors leading-tight">
                             {extension.name}
                         </h3>
                         <div
@@ -83,12 +83,12 @@ function ExtensionCard({ extension, index }: ExtensionCardProps) {
                         </div>
 
                         {/* Tagline */}
-                        <p className="text-sm text-gray-400 mb-5 line-clamp-2 leading-relaxed group-hover:text-gray-300 transition-colors">
+                        <p className="text-sm text-gray-400 mb-4 line-clamp-2 leading-relaxed group-hover:text-gray-300 transition-colors">
                             {extension.tagline}
                         </p>
 
                         {/* Features preview */}
-                        <div className="space-y-2 mb-5">
+                        <div className="space-y-2 mb-4">
                             {extension.features.slice(0, 3).map((feature, i) => (
                                 <motion.div
                                     key={i}
@@ -102,7 +102,7 @@ function ExtensionCard({ extension, index }: ExtensionCardProps) {
                         </div>
 
                         {/* Footer */}
-                        <div className="flex items-center justify-between pt-5 border-t border-border group-hover:border-cyan/30 transition-colors">
+                        <div className="flex items-center justify-between pt-4 border-t border-border group-hover:border-cyan/30 transition-colors">
                             <div className="flex items-center gap-2">
                                 <Chrome className="w-4 h-4 text-gray-500 group-hover:text-cyan transition-colors" />
                                 <span className="text-xs text-gray-500">Chrome • Edge</span>
@@ -167,16 +167,16 @@ export function ExtensionsSection() {
                     initial={{ opacity: 0, y: 30 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.6 }}
-                    className="text-center mb-14"
+                    className="text-center mb-12"
                 >
-                    <span className="text-xs font-mono text-cyan uppercase tracking-widest mb-4 block">
-            // Our Arsenal
+                    <span className="text-xs font-mono text-cyan uppercase tracking-widest mb-3 block">
+                        {/* Our Arsenal */}
                     </span>
-                    <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-5">
+                    <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
                         Powerful Extensions for{" "}
                         <span className="animated-gradient-text">Elite Hunters</span>
                     </h2>
-                    <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+                    <p className="text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed">
                         Each extension is crafted for a specific hunting workflow.
                         Use them individually or combine for maximum effectiveness.
                     </p>
@@ -187,7 +187,7 @@ export function ExtensionsSection() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.6, delay: 0.2 }}
-                    className="flex flex-wrap justify-center gap-2 mb-12"
+                    className="flex flex-wrap justify-center gap-2 mb-10"
                 >
                     <button
                         onClick={() => setActiveCategory("ALL")}
@@ -217,7 +217,7 @@ export function ExtensionsSection() {
                 </motion.div>
 
                 {/* Extensions Grid */}
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-14">
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6 mb-12">
                     {filteredExtensions.map((extension, index) => (
                         <ExtensionCard key={extension.id} extension={extension} index={index} />
                     ))}

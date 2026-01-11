@@ -62,7 +62,7 @@ export function TestimonialsSection() {
                     initial={{ opacity: 0, y: 30 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.6 }}
-                    className="text-center mb-16"
+                    className="text-center mb-12"
                 >
                     <span className="text-xs font-mono text-purple uppercase tracking-widest mb-3 block">
             // Social Proof
@@ -70,14 +70,14 @@ export function TestimonialsSection() {
                     <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
                         Trusted by <span className="text-gradient">Elite Hunters</span>
                     </h2>
-                    <p className="text-gray-400 max-w-2xl mx-auto">
+                    <p className="text-gray-400 max-w-2xl mx-auto leading-relaxed">
                         Join thousands of security researchers who have leveled up
-                        their bug bounty game with HexStrike.
+                        their bug bounty game with HexStrike&apos;s.
                     </p>
                 </motion.div>
 
                 {/* Featured testimonial carousel */}
-                <div className="max-w-3xl mx-auto mb-16">
+                <div className="max-w-3xl mx-auto mb-14">
                     <div className="relative">
                         {/* Navigation buttons */}
                         <motion.button
@@ -125,7 +125,7 @@ export function TestimonialsSection() {
 
                                         {/* Quote */}
                                         <p className="text-xl lg:text-2xl text-white font-medium mb-6 leading-relaxed">
-                                            "{TESTIMONIALS[currentIndex].quote}"
+                                            &ldquo;{TESTIMONIALS[currentIndex].quote}&rdquo;
                                         </p>
 
                                         {/* Rating */}
@@ -192,7 +192,7 @@ export function TestimonialsSection() {
                 </div>
 
                 {/* Testimonial grid */}
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
                     {TESTIMONIALS.slice(0, 6).map((testimonial, index) => (
                         <motion.div
                             key={testimonial.id}
@@ -221,7 +221,7 @@ export function TestimonialsSection() {
 
                                     {/* Quote */}
                                     <p className="text-sm text-gray-300 mb-4 line-clamp-4 group-hover:text-gray-200 transition-colors">
-                                        "{testimonial.quote}"
+                                        &ldquo;{testimonial.quote}&rdquo;
                                     </p>
 
                                     {/* Author */}

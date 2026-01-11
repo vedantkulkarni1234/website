@@ -84,9 +84,9 @@ function PricingCard({ bundle, index }: PricingCardProps) {
                     {/* Gradient overlay on hover */}
                     <div className={`absolute inset-0 bg-gradient-to-br from-${bundle.color}/10 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none`} />
 
-                    <div className="p-8 relative">
+                    <div className="p-6 lg:p-8 relative">
                         {/* Header */}
-                        <div className="text-center mb-6">
+                        <div className="text-center mb-5">
                             <motion.h3
                                 className={cn("text-2xl font-bold mb-2", colors.text)}
                                 whileHover={{ scale: 1.05 }}
@@ -97,7 +97,7 @@ function PricingCard({ bundle, index }: PricingCardProps) {
                         </div>
 
                         {/* Pricing */}
-                        <div className="text-center mb-8">
+                        <div className="text-center mb-6">
                             <motion.div
                                 className="flex items-baseline justify-center gap-3"
                                 whileHover={{ scale: 1.02 }}
@@ -122,7 +122,7 @@ function PricingCard({ bundle, index }: PricingCardProps) {
                             <Button
                                 variant={bundle.popular ? "primary" : "secondary"}
                                 size="lg"
-                                className="w-full mb-8"
+                                className="w-full mb-6"
                                 icon={<ArrowRight className="w-5 h-5" />}
                                 iconPosition="right"
                             >
@@ -131,7 +131,7 @@ function PricingCard({ bundle, index }: PricingCardProps) {
                         </Link>
 
                         {/* Included Extensions */}
-                        <div className="border-t border-border pt-6">
+                        <div className="border-t border-border pt-5">
                             <div className="flex items-center gap-2 mb-5">
                                 <Zap className={cn("w-4 h-4", colors.icon)} />
                                 <span className="text-sm font-semibold text-white">
@@ -184,21 +184,21 @@ export function PricingSection() {
                     initial={{ opacity: 0, y: 30 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.6 }}
-                    className="text-center mb-14"
+                    className="text-center mb-12"
                 >
-                    <span className="text-xs font-mono text-purple uppercase tracking-widest mb-4 block">
-            // Pricing
+                    <span className="text-xs font-mono text-purple uppercase tracking-widest mb-3 block">
+                        {/* Pricing */}
                     </span>
-                    <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-5">
+                    <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
                         Choose Your <span className="text-gradient">Arsenal</span>
                     </h2>
-                    <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+                    <p className="text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed">
                         One-time purchase. Lifetime updates. No subscriptions.
                     </p>
                 </motion.div>
 
                 {/* Pricing Grid */}
-                <div className="grid md:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto">
+                <div className="grid md:grid-cols-3 gap-5 lg:gap-6 max-w-5xl mx-auto">
                     {BUNDLES.map((bundle, index) => (
                         <PricingCard key={bundle.id} bundle={bundle} index={index} />
                     ))}
@@ -209,7 +209,7 @@ export function PricingSection() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.6, delay: 0.6 }}
-                    className="mt-14 text-center"
+                    className="mt-12 text-center"
                 >
                     <p className="text-gray-400 mb-6">
                         Want individual extensions?{" "}

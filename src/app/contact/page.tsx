@@ -4,11 +4,9 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import {
     Mail,
-    MessageSquare,
     Send,
     Github,
     Twitter,
-    MapPin,
     Clock,
     Check,
 } from "lucide-react";
@@ -55,21 +53,21 @@ export default function ContactPage() {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6 }}
-                        className="text-center mb-16"
+                        className="text-center mb-12"
                     >
                         <span className="text-xs font-mono text-cyan uppercase tracking-widest mb-3 block">
-              // Contact
+                            {/* Contact */}
                         </span>
                         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4">
                             Get in <span className="text-gradient">Touch</span>
                         </h1>
-                        <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+                        <p className="text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed">
                             Have a question or need support? We're here to help.
                             Reach out and we'll get back to you within 24 hours.
                         </p>
                     </motion.div>
 
-                    <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+                    <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto">
                         {/* Contact Form */}
                         <motion.div
                             initial={{ opacity: 0, x: -30 }}
@@ -78,7 +76,7 @@ export default function ContactPage() {
                         >
                             <Card variant="glow" padding="lg">
                                 {isSubmitted ? (
-                                    <div className="text-center py-8">
+                                    <div className="text-center py-10">
                                         <div className="w-16 h-16 rounded-full bg-matrix/20 flex items-center justify-center mx-auto mb-4">
                                             <Check className="w-8 h-8 text-matrix" />
                                         </div>
@@ -263,7 +261,7 @@ export default function ContactPage() {
                                         <h3 className="font-bold text-white mb-1">
                                             Response Time
                                         </h3>
-                                        <p className="text-sm text-gray-400">
+                                        <p className="text-sm text-gray-400 leading-relaxed">
                                             We typically respond within 24 hours during business days.
                                             For urgent issues, mention "URGENT" in your subject.
                                         </p>

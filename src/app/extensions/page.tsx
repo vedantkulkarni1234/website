@@ -10,7 +10,6 @@ import {
     Chrome,
     Star,
     Check,
-    Filter,
     Grid,
     List,
     X,
@@ -36,7 +35,6 @@ export default function ExtensionsPage() {
         "featured"
     );
     const sectionRef = useRef(null);
-    const isInView = useInView(sectionRef, { once: true });
 
     // Filter and sort extensions
     const filteredExtensions = useMemo(() => {
@@ -91,12 +89,12 @@ export default function ExtensionsPage() {
                         className="text-center mb-12"
                     >
                         <span className="text-xs font-mono text-cyan uppercase tracking-widest mb-3 block">
-              // Arsenal
+                            {/* Arsenal */}
                         </span>
                         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4">
                             All <span className="text-gradient">Extensions</span>
                         </h1>
-                        <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+                        <p className="text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed">
                             17 powerful browser extensions designed for elite bug bounty hunters.
                             Each tool crafted to maximize your hunting efficiency.
                         </p>
@@ -231,7 +229,7 @@ export default function ExtensionsPage() {
                     ) : (
                         <div
                             className={cn(
-                                "gap-6",
+                                "gap-5 lg:gap-6",
                                 viewMode === "grid"
                                     ? "grid sm:grid-cols-2 lg:grid-cols-3"
                                     : "flex flex-col"
@@ -272,7 +270,7 @@ function ExtensionCard({ extension, index, viewMode }: ExtensionCardProps) {
             >
                 <Link href={`/extensions/${extension.slug}`}>
                     <Card variant="default" padding="none" className="group">
-                        <div className="flex flex-col sm:flex-row items-start gap-4 p-5">
+                        <div className="flex flex-col sm:flex-row items-start gap-4 p-5 lg:p-6">
                             {/* Icon */}
                             <div
                                 className="text-4xl p-3 rounded-lg bg-surface-light flex-shrink-0"
@@ -376,7 +374,7 @@ function ExtensionCard({ extension, index, viewMode }: ExtensionCardProps) {
                             )}
                         </div>
 
-                        <h3 className="text-lg font-bold text-white mb-1 group-hover:text-cyan transition-colors">
+                        <h3 className="text-lg font-bold text-white mb-1 group-hover:text-cyan transition-colors leading-tight">
                             {extension.name}
                         </h3>
                         <div
@@ -386,7 +384,7 @@ function ExtensionCard({ extension, index, viewMode }: ExtensionCardProps) {
                             {category.name}
                         </div>
 
-                        <p className="text-sm text-gray-400 mb-4 line-clamp-2">
+                        <p className="text-sm text-gray-400 mb-4 line-clamp-2 leading-relaxed">
                             {extension.tagline}
                         </p>
 
