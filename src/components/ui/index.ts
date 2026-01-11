@@ -1,6 +1,6 @@
 export { Button } from "./Button";
 export { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "./Card";
-export { TypewriterGlitch } from "./GlitchText";
+export { GlitchText, TypewriterGlitch } from "./GlitchText";
 export { Terminal, MiniTerminal } from "./Terminal";
 export { Navigation } from "./Navigation";
 export { Footer } from "./Footer";

@@ -4,7 +4,7 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
-import { Button, Terminal, AnimatedBackground, FloatingOrbs } from "@/components/ui";
+import { Button, Terminal, AnimatedBackground, FloatingOrbs, GlitchText } from "@/components/ui";
 import { STATS } from "@/lib/constants";
 
 // Dynamically import 3D scene to avoid SSR issues
