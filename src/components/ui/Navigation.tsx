@@ -43,11 +43,6 @@ export function Navigation() {
     const openCart = useCartStore((state) => state.openCart);
     const itemCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
-    // Mark as mounted after hydration
-    useEffect(() => {
-        setIsMounted(true);
-    }, []);
-
     useEffect(() => {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 20);
@@ -59,8 +54,10 @@ export function Navigation() {
 
     // Close mobile menu on route change
     useEffect(() => {
-        setIsMobileMenuOpen(false);
-    }, [pathname]);
+        if (isMobileMenuOpen) {
+            setIsMobileMenuOpen(false);
+        }
+    }, [pathname, isMobileMenuOpen]);
 
     return (
         <header
@@ -72,21 +69,21 @@ export function Navigation() {
             )}
             suppressHydrationWarning
         >
-            <nav className="container mx-auto px-4 lg:px-8">
-                <div className="flex items-center justify-between h-16 lg:h-18">
+            <nav className="container mx-auto px-4 lg:px-6">
+                <div className="flex items-center justify-between h-16 lg:h-20">
                     {/* Logo */}
                     <Link href="/" className="flex items-center gap-3 group">
-                        <div className="relative w-9 h-9 flex items-center justify-center">
+                        <div className="relative w-10 h-10 flex items-center justify-center">
                             <div className="absolute inset-0 bg-gradient-to-r from-cyan to-purple rounded-lg opacity-20 group-hover:opacity-40 transition-opacity" />
                             <span className="text-xl font-bold text-white relative z-10">
                                 ⬡
                             </span>
                         </div>
                         <div className="flex flex-col">
-                            <span className="text-base font-bold text-white tracking-tight leading-tight">
+                            <span className="text-base font-bold text-white tracking-tight leading-none">
                                 {SITE_CONFIG.name}
                             </span>
-                            <span className="text-[10px] text-cyan font-mono uppercase tracking-widest">
+                            <span className="text-[10px] text-cyan font-mono uppercase tracking-widest mt-0.5">
                                 {SITE_CONFIG.tagline}
                             </span>
                         </div>
@@ -236,7 +233,7 @@ export function Navigation() {
                                         {item.label}
                                     </Link>
                                     {item.children && (
-                                        <div className="pl-4 mt-1 space-y-1">
+                                        <div className="pl-4 mt-2 space-y-1">
                                             {item.children.map((child) => (
                                                 <Link
                                                     key={child.href}

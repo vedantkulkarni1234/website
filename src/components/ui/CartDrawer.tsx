@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, ShoppingCart, Trash2, Plus, Minus, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui";
 import { useCartStore } from "@/store";
-import { cn, formatPrice } from "@/lib/utils";
+import { formatPrice } from "@/lib/utils";
 
 export function CartDrawer() {
     const { items, isOpen, closeCart, removeItem, updateQuantity, totalPrice, clearCart } =
@@ -36,7 +36,7 @@ export function CartDrawer() {
                         className="fixed top-0 right-0 h-full w-full max-w-md bg-surface border-l border-border z-50 flex flex-col"
                     >
                         {/* Header */}
-                        <div className="flex items-center justify-between p-4 border-b border-border">
+                        <div className="flex items-center justify-between p-5 border-b border-border">
                             <div className="flex items-center gap-3">
                                 <ShoppingCart className="w-5 h-5 text-cyan" />
                                 <h2 className="text-lg font-bold text-white">Cart</h2>
@@ -54,9 +54,9 @@ export function CartDrawer() {
                         </div>
 
                         {/* Items */}
-                        <div className="flex-1 overflow-y-auto p-4">
+                        <div className="flex-1 overflow-y-auto p-5">
                             {items.length === 0 ? (
-                                <div className="flex flex-col items-center justify-center h-full text-center">
+                                <div className="flex flex-col items-center justify-center h-full text-center py-8">
                                     <ShoppingCart className="w-12 h-12 text-gray-600 mb-4" />
                                     <p className="text-gray-400 mb-4">Your cart is empty</p>
                                     <Button variant="secondary" onClick={closeCart}>
@@ -75,7 +75,7 @@ export function CartDrawer() {
                                             className="flex gap-4 p-4 bg-void rounded-lg border border-border"
                                         >
                                             <div className="flex-1">
-                                                <h3 className="font-medium text-white">{item.name}</h3>
+                                                <h3 className="font-medium text-white leading-tight">{item.name}</h3>
                                                 <p className="text-sm text-gray-500 capitalize">
                                                     {item.type}
                                                 </p>
@@ -125,7 +125,7 @@ export function CartDrawer() {
 
                         {/* Footer */}
                         {items.length > 0 && (
-                            <div className="p-4 border-t border-border space-y-4">
+                            <div className="p-5 border-t border-border space-y-4">
                                 {/* Clear cart */}
                                 <button
                                     onClick={clearCart}

@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
-import { ChevronDown, Plus, Minus } from "lucide-react";
+import { Plus, Minus } from "lucide-react";
 import { Button, GlowingLine } from "@/components/ui";
 import { FAQ } from "@/lib/constants";
 import { cn } from "@/lib/utils";
@@ -27,13 +27,13 @@ function FAQItem({ question, answer, isOpen, onClick, index }: FAQItemProps) {
         >
             <motion.button
                 onClick={onClick}
-                className="w-full py-5 flex items-start justify-between gap-4 text-left relative"
+                className="w-full py-4 lg:py-5 flex items-start justify-between gap-4 text-left relative"
                 aria-expanded={isOpen}
                 whileHover={{ x: 5 }}
             >
                 <span
                     className={cn(
-                        "text-lg font-medium transition-colors",
+                        "text-base lg:text-lg font-medium transition-colors leading-tight",
                         isOpen ? "text-cyan" : "text-white group-hover:text-cyan"
                     )}
                 >
@@ -65,7 +65,7 @@ function FAQItem({ question, answer, isOpen, onClick, index }: FAQItemProps) {
                 transition={{ duration: 0.3 }}
                 className="overflow-hidden"
             >
-                <p className="pb-5 text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors">{answer}</p>
+                <p className="pb-4 lg:pb-5 text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors">{answer}</p>
             </motion.div>
         </motion.div>
     );
@@ -99,7 +99,7 @@ export function FAQSection() {
                     <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
                         Frequently Asked <span className="animated-gradient-text">Questions</span>
                     </h2>
-                    <p className="text-gray-400 max-w-2xl mx-auto">
+                    <p className="text-gray-400 max-w-2xl mx-auto leading-relaxed">
                         Got questions? We've got answers. If you can't find what you're
                         looking for, reach out to our support team.
                     </p>
@@ -108,7 +108,7 @@ export function FAQSection() {
                 {/* FAQ Accordion */}
                 <div className="max-w-3xl mx-auto">
                     <motion.div
-                        className="bg-surface/60 backdrop-blur-md border border-border/50 rounded-2xl p-6 card-lift"
+                        className="bg-surface/60 backdrop-blur-md border border-border/50 rounded-2xl p-5 lg:p-6 card-lift"
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={isInView ? { opacity: 1, scale: 1 } : {}}
                         transition={{ duration: 0.6, delay: 0.2 }}

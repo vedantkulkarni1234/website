@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { Github, Twitter, Mail } from "lucide-react";
-import { cn } from "@/lib/utils";
 import { SITE_CONFIG, CATEGORIES } from "@/lib/constants";
 
 const footerLinks = {
@@ -40,7 +39,7 @@ export function Footer() {
 
             <div className="container relative mx-auto px-4 lg:px-8">
                 {/* Main footer content */}
-                <div className="py-16 lg:py-20 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-12">
+                <div className="py-12 lg:py-16 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 lg:gap-8">
                     {/* Brand column */}
                     <div className="col-span-2 md:col-span-3 lg:col-span-2">
                         <Link href="/" className="inline-flex items-center gap-3 mb-5">
@@ -48,10 +47,10 @@ export function Footer() {
                                 <span className="text-xl font-bold text-void">⬡</span>
                             </div>
                             <div>
-                                <span className="text-lg font-bold text-white block leading-tight">
+                                <span className="text-lg font-bold text-white block leading-none">
                                     {SITE_CONFIG.name}
                                 </span>
-                                <span className="text-[10px] text-cyan font-mono uppercase tracking-widest">
+                                <span className="text-[10px] text-cyan font-mono uppercase tracking-widest mt-0.5 block">
                                     {SITE_CONFIG.tagline}
                                 </span>
                             </div>
@@ -97,7 +96,7 @@ export function Footer() {
                         <h3 className="text-sm font-semibold text-white mb-4 uppercase tracking-wider">
                             Product
                         </h3>
-                        <ul className="space-y-3">
+                        <ul className="space-y-2.5">
                             {footerLinks.product.map((link) => (
                                 <li key={link.href}>
                                     <Link
@@ -115,7 +114,7 @@ export function Footer() {
                         <h3 className="text-sm font-semibold text-white mb-4 uppercase tracking-wider">
                             Resources
                         </h3>
-                        <ul className="space-y-3">
+                        <ul className="space-y-2.5">
                             {footerLinks.resources.map((link) => (
                                 <li key={link.href}>
                                     <Link
@@ -133,7 +132,7 @@ export function Footer() {
                         <h3 className="text-sm font-semibold text-white mb-4 uppercase tracking-wider">
                             Company
                         </h3>
-                        <ul className="space-y-3">
+                        <ul className="space-y-2.5">
                             {footerLinks.company.map((link) => (
                                 <li key={link.href}>
                                     <Link
@@ -151,7 +150,7 @@ export function Footer() {
                         <h3 className="text-sm font-semibold text-white mb-4 uppercase tracking-wider">
                             Legal
                         </h3>
-                        <ul className="space-y-3">
+                        <ul className="space-y-2.5">
                             {footerLinks.legal.map((link) => (
                                 <li key={link.href}>
                                     <Link
@@ -183,8 +182,8 @@ export function Footer() {
 
                 {/* Bottom bar */}
                 <div className="py-6 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
-                    <div className="text-sm text-gray-500 font-mono">
-                        <span className="text-cyan">$</span> echo "© 2024 {SITE_CONFIG.name}. All rights reserved."
+                    <div className="text-sm text-gray-500 font-mono leading-tight">
+                        <span className="text-cyan">$</span> echo &quot;© 2024 {SITE_CONFIG.name}. All rights reserved.&quot;
                     </div>
 
                     <div className="flex items-center gap-6 text-sm text-gray-500">
