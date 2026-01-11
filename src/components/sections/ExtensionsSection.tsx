@@ -4,7 +4,7 @@ import { useState, useRef } from "react";
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight, Chrome, Star, Check } from "lucide-react";
-import { Button, Card, CardContent } from "@/components/ui";
+import { Button, Card, CardContent, ScanningLine } from "@/components/ui";
 import { EXTENSIONS, CATEGORIES, CategoryKey } from "@/lib/constants";
 import { cn, formatPrice } from "@/lib/utils";
 
@@ -28,32 +28,46 @@ function ExtensionCard({ extension, index }: ExtensionCardProps) {
                 <Card
                     variant="default"
                     padding="none"
-                    className="group cursor-pointer h-full"
+                    className="group cursor-pointer h-full card-lift relative overflow-hidden"
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
                 >
+                    {/* Scanning Line Effect on Hover */}
+                    <ScanningLine />
+
+                    {/* Gradient overlay on hover */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-cyan/5 to-purple/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+
                     {/* Top accent bar */}
-                    <div
-                        className="h-1 w-full transition-all duration-300 group-hover:h-1.5"
+                    <motion.div
+                        className="h-1 w-full"
                         style={{ backgroundColor: extension.color }}
+                        initial={{ height: "4px" }}
+                        whileHover={{ height: "8px" }}
+                        transition={{ duration: 0.3 }}
                     />
 
-                    <CardContent className="p-6">
+                    <CardContent className="p-6 relative">
                         {/* Header */}
                         <div className="flex items-start justify-between mb-4">
-                            <div
+                            <motion.div
                                 className="text-3xl p-3 rounded-xl bg-surface"
                                 style={{ boxShadow: `0 0 30px ${extension.color}15` }}
+                                whileHover={{ scale: 1.1, rotate: 5 }}
+                                transition={{ duration: 0.3 }}
                             >
                                 {extension.icon}
-                            </div>
+                            </motion.div>
                             {extension.featured && (
-                                <div className="flex items-center gap-1.5 px-2.5 py-1 bg-purple/10 border border-purple/30 rounded-full">
+                                <motion.div
+                                    className="flex items-center gap-1.5 px-2.5 py-1 bg-purple/10 border border-purple/30 rounded-full"
+                                    whileHover={{ scale: 1.05 }}
+                                >
                                     <Star className="w-3 h-3 text-purple fill-purple" />
                                     <span className="text-[10px] text-purple font-semibold uppercase tracking-wide">
                                         Featured
                                     </span>
-                                </div>
+                                </motion.div>
                             )}
                         </div>
 
@@ -69,24 +83,28 @@ function ExtensionCard({ extension, index }: ExtensionCardProps) {
                         </div>
 
                         {/* Tagline */}
-                        <p className="text-sm text-gray-400 mb-5 line-clamp-2 leading-relaxed">
+                        <p className="text-sm text-gray-400 mb-5 line-clamp-2 leading-relaxed group-hover:text-gray-300 transition-colors">
                             {extension.tagline}
                         </p>
 
                         {/* Features preview */}
                         <div className="space-y-2 mb-5">
                             {extension.features.slice(0, 3).map((feature, i) => (
-                                <div key={i} className="flex items-center gap-2.5 text-xs text-gray-400">
+                                <motion.div
+                                    key={i}
+                                    className="flex items-center gap-2.5 text-xs text-gray-400 group-hover:text-gray-300 transition-colors"
+                                    whileHover={{ x: 5 }}
+                                >
                                     <Check className="w-3.5 h-3.5 text-green-400 flex-shrink-0" />
                                     <span className="line-clamp-1">{feature}</span>
-                                </div>
+                                </motion.div>
                             ))}
                         </div>
 
                         {/* Footer */}
-                        <div className="flex items-center justify-between pt-5 border-t border-border">
+                        <div className="flex items-center justify-between pt-5 border-t border-border group-hover:border-cyan/30 transition-colors">
                             <div className="flex items-center gap-2">
-                                <Chrome className="w-4 h-4 text-gray-500" />
+                                <Chrome className="w-4 h-4 text-gray-500 group-hover:text-cyan transition-colors" />
                                 <span className="text-xs text-gray-500">Chrome • Edge</span>
                             </div>
                             <div className="flex items-center gap-2">
@@ -95,12 +113,13 @@ function ExtensionCard({ extension, index }: ExtensionCardProps) {
                                         {formatPrice(extension.price)}
                                     </span>
                                 )}
-                                <span
+                                <motion.span
                                     className="text-lg font-bold"
                                     style={{ color: extension.color }}
+                                    whileHover={{ scale: 1.1 }}
                                 >
                                     {formatPrice(extension.salePrice || extension.price)}
-                                </span>
+                                </motion.span>
                             </div>
                         </div>
 
@@ -155,7 +174,7 @@ export function ExtensionsSection() {
                     </span>
                     <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-5">
                         Powerful Extensions for{" "}
-                        <span className="text-gradient">Elite Hunters</span>
+                        <span className="animated-gradient-text">Elite Hunters</span>
                     </h2>
                     <p className="text-lg text-gray-400 max-w-2xl mx-auto">
                         Each extension is crafted for a specific hunting workflow.

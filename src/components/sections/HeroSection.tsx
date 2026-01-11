@@ -3,8 +3,8 @@
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
-import { ArrowRight, ChevronDown } from "lucide-react";
-import { Button, GlitchText, Terminal } from "@/components/ui";
+import { ArrowRight, ChevronDown, Sparkles } from "lucide-react";
+import { Button, GlitchText, Terminal, AnimatedBackground, FloatingOrbs } from "@/components/ui";
 import { STATS } from "@/lib/constants";
 
 // Dynamically import 3D scene to avoid SSR issues
@@ -20,11 +20,20 @@ const HeroScene = dynamic(() => import("@/components/3d/HeroScene"), {
 export function HeroSection() {
     return (
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+            {/* Background Effects */}
+            <div className="absolute inset-0">
+                <AnimatedBackground />
+                <FloatingOrbs />
+            </div>
+
             {/* 3D Background */}
             <HeroScene />
 
             {/* Overlay gradient */}
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-void/50 to-void pointer-events-none z-10" />
+
+            {/* Aurora effect */}
+            <div className="aurora" />
 
             {/* Content */}
             <div className="container relative z-20 px-4 lg:px-8 pt-24 pb-16">
@@ -115,18 +124,29 @@ export function HeroSection() {
                         transition={{ duration: 0.8, delay: 1 }}
                         className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mt-16 max-w-3xl mx-auto"
                     >
-                        {STATS.map((stat) => (
-                            <div
+                        {STATS.map((stat, index) => (
+                            <motion.div
                                 key={stat.label}
-                                className="text-center p-5 bg-surface/40 backdrop-blur-sm border border-border/50 rounded-xl"
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ duration: 0.4, delay: 1 + index * 0.1 }}
+                                whileHover={{ scale: 1.05, y: -5 }}
+                                className="group text-center p-6 bg-surface/60 backdrop-blur-md border border-cyan/20 rounded-2xl card-lift relative overflow-hidden"
                             >
-                                <div className="text-2xl sm:text-3xl font-bold text-cyan mb-1">
-                                    {stat.value}
+                                <div className="absolute inset-0 bg-gradient-to-br from-cyan/10 to-purple/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+                                <div className="relative">
+                                    <motion.div
+                                        className="text-2xl sm:text-3xl font-bold text-cyan mb-1"
+                                        animate={{ textShadow: ["0 0 20px rgba(0,255,255,0.3)", "0 0 40px rgba(0,255,255,0.6)", "0 0 20px rgba(0,255,255,0.3)"] }}
+                                        transition={{ duration: 3, repeat: Infinity }}
+                                    >
+                                        {stat.value}
+                                    </motion.div>
+                                    <div className="text-xs text-gray-400 uppercase tracking-wider font-medium">
+                                        {stat.label}
+                                    </div>
                                 </div>
-                                <div className="text-xs text-gray-500 uppercase tracking-wider font-medium">
-                                    {stat.label}
-                                </div>
-                            </div>
+                            </motion.div>
                         ))}
                     </motion.div>
                 </div>

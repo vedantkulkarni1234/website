@@ -54,95 +54,117 @@ function PricingCard({ bundle, index }: PricingCardProps) {
         >
             {/* Popular badge */}
             {bundle.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
-                    <div className="flex items-center gap-2 px-4 py-1.5 bg-purple rounded-full shadow-lg">
+                <motion.div
+                    className="absolute -top-4 left-1/2 -translate-x-1/2 z-10"
+                    animate={{ y: [0, -5, 0] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                >
+                    <div className="flex items-center gap-2 px-4 py-1.5 bg-purple rounded-full shadow-lg shadow-purple/30">
                         <Crown className="w-4 h-4 text-void" />
                         <span className="text-xs font-bold text-void uppercase tracking-wide">
                             Most Popular
                         </span>
                     </div>
-                </div>
+                </motion.div>
             )}
 
-            <Card
-                variant={bundle.popular ? "glow" : "default"}
-                padding="none"
-                hover={false}
-                className={cn(
-                    "h-full",
-                    bundle.popular && "border-purple/50 shadow-xl shadow-purple/10"
-                )}
+            <motion.div
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.3 }}
             >
-                <div className="p-8">
-                    {/* Header */}
-                    <div className="text-center mb-6">
-                        <h3 className={cn("text-2xl font-bold mb-2", colors.text)}>
-                            {bundle.name}
-                        </h3>
-                        <p className="text-sm text-gray-400 leading-relaxed">{bundle.description}</p>
-                    </div>
+                <Card
+                    variant={bundle.popular ? "glow" : "default"}
+                    padding="none"
+                    hover={false}
+                    className={cn(
+                        "h-full card-lift relative overflow-hidden",
+                        bundle.popular && "border-purple/50 shadow-xl shadow-purple/10"
+                    )}
+                >
+                    {/* Gradient overlay on hover */}
+                    <div className={`absolute inset-0 bg-gradient-to-br from-${bundle.color}/10 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none`} />
 
-                    {/* Pricing */}
-                    <div className="text-center mb-8">
-                        <div className="flex items-baseline justify-center gap-3">
-                            <span className="text-lg text-gray-500 line-through">
-                                {formatPrice(bundle.originalPrice)}
-                            </span>
-                            <span className={cn("text-4xl lg:text-5xl font-bold", colors.text)}>
-                                {formatPrice(bundle.price)}
-                            </span>
-                        </div>
-                        <div className="flex items-center justify-center gap-3 mt-3">
-                            <span className={cn("px-3 py-1 text-xs font-bold rounded-full", colors.bg, colors.text)}>
-                                SAVE {bundle.savings}%
-                            </span>
-                            <span className="text-xs text-gray-500">One-time payment</span>
-                        </div>
-                    </div>
-
-                    {/* CTA Button */}
-                    <Link href={`/checkout?bundle=${bundle.slug}`}>
-                        <Button
-                            variant={bundle.popular ? "primary" : "secondary"}
-                            size="lg"
-                            className="w-full mb-8"
-                            icon={<ArrowRight className="w-5 h-5" />}
-                            iconPosition="right"
-                        >
-                            Get {bundle.name}
-                        </Button>
-                    </Link>
-
-                    {/* Included Extensions */}
-                    <div className="border-t border-border pt-6">
-                        <div className="flex items-center gap-2 mb-5">
-                            <Zap className={cn("w-4 h-4", colors.icon)} />
-                            <span className="text-sm font-semibold text-white">
-                                {bundleExtensions.length} Extensions Included
-                            </span>
+                    <div className="p-8 relative">
+                        {/* Header */}
+                        <div className="text-center mb-6">
+                            <motion.h3
+                                className={cn("text-2xl font-bold mb-2", colors.text)}
+                                whileHover={{ scale: 1.05 }}
+                            >
+                                {bundle.name}
+                            </motion.h3>
+                            <p className="text-sm text-gray-400 leading-relaxed">{bundle.description}</p>
                         </div>
 
-                        <ul className="space-y-3">
-                            {bundleExtensions.slice(0, 5).map((ext) => (
-                                <li key={ext.id} className="flex items-start gap-3">
-                                    <Check className={cn("w-4 h-4 mt-0.5 flex-shrink-0", colors.icon)} />
-                                    <div className="flex-1 flex items-baseline justify-between gap-2">
-                                        <span className="text-sm text-gray-200">{ext.name}</span>
-                                        <span className="text-xs text-gray-500 font-mono">
-                                            {formatPrice(ext.price)}
-                                        </span>
-                                    </div>
-                                </li>
-                            ))}
-                            {bundleExtensions.length > 5 && (
-                                <li className="text-sm text-gray-400 pl-7">
-                                    +{bundleExtensions.length - 5} more extensions
-                                </li>
-                            )}
-                        </ul>
+                        {/* Pricing */}
+                        <div className="text-center mb-8">
+                            <motion.div
+                                className="flex items-baseline justify-center gap-3"
+                                whileHover={{ scale: 1.02 }}
+                            >
+                                <span className="text-lg text-gray-500 line-through">
+                                    {formatPrice(bundle.originalPrice)}
+                                </span>
+                                <span className={cn("text-4xl lg:text-5xl font-bold", colors.text)}>
+                                    {formatPrice(bundle.price)}
+                                </span>
+                            </motion.div>
+                            <div className="flex items-center justify-center gap-3 mt-3">
+                                <span className={cn("px-3 py-1 text-xs font-bold rounded-full", colors.bg, colors.text)}>
+                                    SAVE {bundle.savings}%
+                                </span>
+                                <span className="text-xs text-gray-500">One-time payment</span>
+                            </div>
+                        </div>
+
+                        {/* CTA Button */}
+                        <Link href={`/checkout?bundle=${bundle.slug}`}>
+                            <Button
+                                variant={bundle.popular ? "primary" : "secondary"}
+                                size="lg"
+                                className="w-full mb-8"
+                                icon={<ArrowRight className="w-5 h-5" />}
+                                iconPosition="right"
+                            >
+                                Get {bundle.name}
+                            </Button>
+                        </Link>
+
+                        {/* Included Extensions */}
+                        <div className="border-t border-border pt-6">
+                            <div className="flex items-center gap-2 mb-5">
+                                <Zap className={cn("w-4 h-4", colors.icon)} />
+                                <span className="text-sm font-semibold text-white">
+                                    {bundleExtensions.length} Extensions Included
+                                </span>
+                            </div>
+
+                            <ul className="space-y-3">
+                                {bundleExtensions.slice(0, 5).map((ext) => (
+                                    <motion.li
+                                        key={ext.id}
+                                        className="flex items-start gap-3 group"
+                                        whileHover={{ x: 5 }}
+                                    >
+                                        <Check className={cn("w-4 h-4 mt-0.5 flex-shrink-0", colors.icon)} />
+                                        <div className="flex-1 flex items-baseline justify-between gap-2">
+                                            <span className="text-sm text-gray-200 group-hover:text-white transition-colors">{ext.name}</span>
+                                            <span className="text-xs text-gray-500 font-mono">
+                                                {formatPrice(ext.price)}
+                                            </span>
+                                        </div>
+                                    </motion.li>
+                                ))}
+                                {bundleExtensions.length > 5 && (
+                                    <li className="text-sm text-gray-400 pl-7">
+                                        +{bundleExtensions.length - 5} more extensions
+                                    </li>
+                                )}
+                            </ul>
+                        </div>
                     </div>
-                </div>
-            </Card>
+                </Card>
+            </motion.div>
         </motion.div>
     );
 }

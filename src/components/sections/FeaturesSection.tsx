@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Zap, Shield, Layers, Download, RefreshCw, Headphones } from "lucide-react";
-import { Card } from "@/components/ui";
+import { Card, GlowingLine } from "@/components/ui";
 import { FEATURES } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
@@ -21,7 +21,7 @@ export function FeaturesSection() {
     const isInView = useInView(sectionRef, { once: true });
 
     return (
-        <section ref={sectionRef} className="section relative bg-void">
+        <section ref={sectionRef} className="section relative bg-void overflow-hidden">
             {/* Background pattern */}
             <div className="absolute inset-0 bg-grid-pattern bg-[size:50px_50px] opacity-30" />
 
@@ -37,7 +37,7 @@ export function FeaturesSection() {
             // Why HexStrike
                     </span>
                     <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
-                        Built for <span className="text-gradient">Professionals</span>
+                        Built for <span className="animated-gradient-text">Professionals</span>
                     </h2>
                     <p className="text-gray-400 max-w-2xl mx-auto">
                         Every feature designed with bug bounty hunters in mind.
@@ -61,24 +61,31 @@ export function FeaturesSection() {
                                 <Card
                                     variant="default"
                                     padding="lg"
-                                    className="h-full group"
+                                    className="h-full group card-lift relative overflow-hidden"
                                 >
-                                    {/* Icon */}
-                                    <div className="w-12 h-12 flex items-center justify-center rounded-lg bg-cyan/10 border border-cyan/30 mb-4 group-hover:bg-cyan/20 transition-colors">
-                                        {IconComponent && (
-                                            <IconComponent className="w-6 h-6 text-cyan" />
-                                        )}
+                                    {/* Gradient overlay on hover */}
+                                    <div className="absolute inset-0 bg-gradient-to-br from-cyan/10 to-purple/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                    <div className="relative">
+                                        {/* Icon */}
+                                        <motion.div
+                                            className="w-14 h-14 flex items-center justify-center rounded-xl bg-cyan/10 border border-cyan/30 mb-4 group-hover:bg-cyan/20 group-hover:scale-110 transition-all duration-300"
+                                            whileHover={{ rotate: 5 }}
+                                        >
+                                            {IconComponent && (
+                                                <IconComponent className="w-7 h-7 text-cyan" />
+                                            )}
+                                        </motion.div>
+
+                                        {/* Title */}
+                                        <h3 className="text-lg font-bold text-white mb-2 group-hover:text-cyan transition-colors">
+                                            {feature.title}
+                                        </h3>
+
+                                        {/* Description */}
+                                        <p className="text-sm text-gray-400 group-hover:text-gray-300 transition-colors">
+                                            {feature.description}
+                                        </p>
                                     </div>
-
-                                    {/* Title */}
-                                    <h3 className="text-lg font-bold text-white mb-2 group-hover:text-cyan transition-colors">
-                                        {feature.title}
-                                    </h3>
-
-                                    {/* Description */}
-                                    <p className="text-sm text-gray-400">
-                                        {feature.description}
-                                    </p>
                                 </Card>
                             </motion.div>
                         );
@@ -103,23 +110,38 @@ export function FeaturesSection() {
                                 { step: "02", label: "Browse", desc: "Extensions work passively" },
                                 { step: "03", label: "Discover", desc: "Find vulnerabilities" },
                             ].map((item, index) => (
-                                <div key={item.step} className="text-center">
-                                    <div className="relative inline-block">
-                                        <div className="w-16 h-16 rounded-full bg-surface border-2 border-cyan flex items-center justify-center mb-3 mx-auto">
-                                            <span className="text-xl font-bold text-cyan font-mono">
+                                <motion.div
+                                    key={item.step}
+                                    className="text-center"
+                                    whileHover={{ scale: 1.05 }}
+                                >
+                                    <div className="relative inline-block group">
+                                        <motion.div
+                                            className="w-20 h-20 rounded-2xl bg-surface border-2 border-cyan/50 flex items-center justify-center mb-4 mx-auto card-lift"
+                                            whileHover={{ borderColor: "#00ffff", rotate: 5 }}
+                                        >
+                                            <span className="text-2xl font-bold text-cyan font-mono group-hover:text-white transition-colors">
                                                 {item.step}
                                             </span>
-                                        </div>
+                                        </motion.div>
                                         {/* Pulse effect */}
-                                        <div className="absolute inset-0 w-16 h-16 rounded-full border-2 border-cyan animate-ping opacity-20 mx-auto" />
+                                        <motion.div
+                                            className="absolute inset-0 w-20 h-20 rounded-2xl border-2 border-cyan animate-ping opacity-20 mx-auto"
+                                            transition={{ duration: 2, repeat: Infinity }}
+                                        />
                                     </div>
-                                    <h4 className="text-white font-bold mb-1">{item.label}</h4>
-                                    <p className="text-sm text-gray-500">{item.desc}</p>
-                                </div>
+                                    <h4 className="text-white font-bold mb-1 group-hover:text-cyan transition-colors">{item.label}</h4>
+                                    <p className="text-sm text-gray-500 group-hover:text-gray-400 transition-colors">{item.desc}</p>
+                                </motion.div>
                             ))}
                         </div>
                     </div>
                 </motion.div>
+
+                {/* Glowing Line Divider */}
+                <div className="mt-20">
+                    <GlowingLine />
+                </div>
             </div>
         </section>
     );
