@@ -80,20 +80,24 @@ export function TestimonialsSection() {
                 <div className="max-w-3xl mx-auto mb-16">
                     <div className="relative">
                         {/* Navigation buttons */}
-                        <button
+                        <motion.button
                             onClick={() => navigate(-1)}
                             className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 lg:-translate-x-12 z-10 p-2 bg-surface border border-border rounded-full text-gray-400 hover:text-cyan hover:border-cyan transition-all"
                             aria-label="Previous testimonial"
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.95 }}
                         >
                             <ChevronLeft className="w-5 h-5" />
-                        </button>
-                        <button
+                        </motion.button>
+                        <motion.button
                             onClick={() => navigate(1)}
                             className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 lg:translate-x-12 z-10 p-2 bg-surface border border-border rounded-full text-gray-400 hover:text-cyan hover:border-cyan transition-all"
                             aria-label="Next testimonial"
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.95 }}
                         >
                             <ChevronRight className="w-5 h-5" />
-                        </button>
+                        </motion.button>
 
                         {/* Testimonial card */}
                         <div className="overflow-hidden">
@@ -110,9 +114,14 @@ export function TestimonialsSection() {
                                         opacity: { duration: 0.2 },
                                     }}
                                 >
-                                    <Card variant="glow" padding="lg" className="text-center">
+                                    <Card variant="glow" padding="lg" className="text-center card-lift">
                                         {/* Quote icon */}
-                                        <Quote className="w-10 h-10 text-cyan/30 mx-auto mb-4" />
+                                        <motion.div
+                                            animate={{ rotate: [0, 5, -5, 0] }}
+                                            transition={{ duration: 4, repeat: Infinity }}
+                                        >
+                                            <Quote className="w-10 h-10 text-cyan/30 mx-auto mb-4" />
+                                        </motion.div>
 
                                         {/* Quote */}
                                         <p className="text-xl lg:text-2xl text-white font-medium mb-6 leading-relaxed">
@@ -122,18 +131,27 @@ export function TestimonialsSection() {
                                         {/* Rating */}
                                         <div className="flex justify-center gap-1 mb-4">
                                             {[...Array(TESTIMONIALS[currentIndex].rating)].map((_, i) => (
-                                                <Star
+                                                <motion.div
                                                     key={i}
-                                                    className="w-5 h-5 text-yellow-500 fill-yellow-500"
-                                                />
+                                                    initial={{ scale: 0 }}
+                                                    animate={{ scale: 1 }}
+                                                    transition={{ delay: i * 0.1 }}
+                                                >
+                                                    <Star
+                                                        className="w-5 h-5 text-yellow-500 fill-yellow-500"
+                                                    />
+                                                </motion.div>
                                             ))}
                                         </div>
 
                                         {/* Author */}
                                         <div className="flex items-center justify-center gap-3">
-                                            <div className="w-12 h-12 rounded-full bg-gradient-to-r from-cyan to-purple flex items-center justify-center text-void font-bold">
+                                            <motion.div
+                                                className="w-12 h-12 rounded-full bg-gradient-to-r from-cyan to-purple flex items-center justify-center text-void font-bold"
+                                                whileHover={{ scale: 1.1, rotate: 5 }}
+                                            >
                                                 {TESTIMONIALS[currentIndex].avatar}
-                                            </div>
+                                            </motion.div>
                                             <div className="text-left">
                                                 <div className="font-bold text-white">
                                                     {TESTIMONIALS[currentIndex].name}
@@ -152,18 +170,20 @@ export function TestimonialsSection() {
                         {/* Dots indicator */}
                         <div className="flex justify-center gap-2 mt-6">
                             {TESTIMONIALS.map((_, index) => (
-                                <button
+                                <motion.button
                                     key={index}
                                     onClick={() => {
                                         setDirection(index > currentIndex ? 1 : -1);
                                         setCurrentIndex(index);
                                     }}
                                     className={cn(
-                                        "w-2 h-2 rounded-full transition-all",
+                                        "h-2 rounded-full transition-all",
                                         index === currentIndex
                                             ? "bg-cyan w-6"
-                                            : "bg-gray-600 hover:bg-gray-500"
+                                            : "bg-gray-600 hover:bg-gray-500 w-2"
                                     )}
+                                    whileHover={{ scale: 1.2 }}
+                                    whileTap={{ scale: 0.9 }}
                                     aria-label={`Go to testimonial ${index + 1}`}
                                 />
                             ))}
@@ -181,37 +201,48 @@ export function TestimonialsSection() {
                             transition={{ duration: 0.5, delay: index * 0.1 }}
                             viewport={{ once: true }}
                         >
-                            <Card variant="default" padding="md" className="h-full">
-                                {/* Stars */}
-                                <div className="flex gap-0.5 mb-3">
-                                    {[...Array(testimonial.rating)].map((_, i) => (
-                                        <Star
-                                            key={i}
-                                            className="w-4 h-4 text-yellow-500 fill-yellow-500"
-                                        />
-                                    ))}
-                                </div>
-
-                                {/* Quote */}
-                                <p className="text-sm text-gray-300 mb-4 line-clamp-4">
-                                    "{testimonial.quote}"
-                                </p>
-
-                                {/* Author */}
-                                <div className="flex items-center gap-2">
-                                    <div className="w-8 h-8 rounded-full bg-gradient-to-r from-cyan to-purple flex items-center justify-center text-void text-xs font-bold">
-                                        {testimonial.avatar}
+                            <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.3 }}>
+                                <Card variant="default" padding="md" className="h-full card-lift group">
+                                    {/* Stars */}
+                                    <div className="flex gap-0.5 mb-3">
+                                        {[...Array(testimonial.rating)].map((_, i) => (
+                                            <motion.div
+                                                key={i}
+                                                initial={{ scale: 0, rotate: -180 }}
+                                                animate={{ scale: 1, rotate: 0 }}
+                                                transition={{ delay: index * 0.1 + i * 0.05 }}
+                                            >
+                                                <Star
+                                                    className="w-4 h-4 text-yellow-500 fill-yellow-500"
+                                                />
+                                            </motion.div>
+                                        ))}
                                     </div>
-                                    <div>
-                                        <div className="text-sm font-medium text-white">
-                                            {testimonial.name}
-                                        </div>
-                                        <div className="text-xs text-gray-500">
-                                            {testimonial.handle}
+
+                                    {/* Quote */}
+                                    <p className="text-sm text-gray-300 mb-4 line-clamp-4 group-hover:text-gray-200 transition-colors">
+                                        "{testimonial.quote}"
+                                    </p>
+
+                                    {/* Author */}
+                                    <div className="flex items-center gap-2">
+                                        <motion.div
+                                            className="w-8 h-8 rounded-full bg-gradient-to-r from-cyan to-purple flex items-center justify-center text-void text-xs font-bold"
+                                            whileHover={{ scale: 1.1, rotate: 5 }}
+                                        >
+                                            {testimonial.avatar}
+                                        </motion.div>
+                                        <div>
+                                            <div className="text-sm font-medium text-white group-hover:text-cyan transition-colors">
+                                                {testimonial.name}
+                                            </div>
+                                            <div className="text-xs text-gray-500">
+                                                {testimonial.handle}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </Card>
+                                </Card>
+                            </motion.div>
                         </motion.div>
                     ))}
                 </div>

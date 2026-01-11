@@ -5,3 +5,6 @@ export { Terminal, MiniTerminal } from "./Terminal";
 export { Navigation } from "./Navigation";
 export { Footer } from "./Footer";
 export { CartDrawer } from "./CartDrawer";
+export { AnimatedBackground, GradientMesh, FloatingOrbs } from "./AnimatedBackground";
+export { WaveDivider, GradientDivider, GlowingLine, AnimatedBorder, ScanningLine } from "./SectionDivider";
+export { Particles, GridBackground, FloatingDots } from "./Particles";

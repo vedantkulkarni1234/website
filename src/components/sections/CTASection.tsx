@@ -3,8 +3,8 @@
 import { useRef } from "react";
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
-import { ArrowRight, Zap } from "lucide-react";
-import { Button, GlitchText } from "@/components/ui";
+import { ArrowRight, Zap, Sparkles } from "lucide-react";
+import { Button, GlitchText, FloatingOrbs } from "@/components/ui";
 
 export function CTASection() {
     const sectionRef = useRef(null);
@@ -14,10 +14,7 @@ export function CTASection() {
         <section ref={sectionRef} className="section relative bg-void overflow-hidden">
             {/* Animated background */}
             <div className="absolute inset-0">
-                {/* Gradient orbs */}
-                <div className="absolute top-0 left-1/4 w-96 h-96 bg-cyan/10 rounded-full blur-3xl" />
-                <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple/10 rounded-full blur-3xl" />
-
+                <FloatingOrbs />
                 {/* Grid pattern */}
                 <div className="absolute inset-0 bg-grid-pattern bg-[size:50px_50px] opacity-30" />
             </div>
@@ -30,9 +27,26 @@ export function CTASection() {
                     className="text-center"
                 >
                     {/* Icon */}
-                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-cyan to-purple mb-8">
-                        <Zap className="w-8 h-8 text-void" />
-                    </div>
+                    <motion.div
+                        className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-r from-cyan to-purple mb-8 relative"
+                        animate={{ rotate: [0, 5, -5, 0] }}
+                        transition={{ duration: 4, repeat: Infinity }}
+                        whileHover={{ scale: 1.1, rotate: 0 }}
+                    >
+                        <motion.div
+                            className="absolute inset-0 rounded-2xl bg-gradient-to-r from-cyan to-purple blur-xl opacity-50"
+                            animate={{ scale: [1, 1.2, 1] }}
+                            transition={{ duration: 2, repeat: Infinity }}
+                        />
+                        <Zap className="w-10 h-10 text-void relative z-10" />
+                        <motion.div
+                            className="absolute -top-1 -right-1"
+                            animate={{ rotate: 360 }}
+                            transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                        >
+                            <Sparkles className="w-6 h-6 text-yellow-400" />
+                        </motion.div>
+                    </motion.div>
 
                     {/* Headline */}
                     <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-6">
@@ -55,40 +69,74 @@ export function CTASection() {
 
                     {/* CTA Buttons */}
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-                        <Link href="/pricing">
-                            <Button
-                                variant="primary"
-                                size="lg"
-                                icon={<ArrowRight className="w-5 h-5" />}
-                                iconPosition="right"
-                                className="min-w-[200px]"
-                            >
-                                Get Started Now
-                            </Button>
-                        </Link>
-                        <Link href="/extensions">
-                            <Button variant="ghost" size="lg" className="min-w-[200px]">
-                                Browse Extensions
-                            </Button>
-                        </Link>
+                        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                            <Link href="/pricing">
+                                <Button
+                                    variant="primary"
+                                    size="lg"
+                                    icon={<ArrowRight className="w-5 h-5" />}
+                                    iconPosition="right"
+                                    className="min-w-[200px]"
+                                >
+                                    Get Started Now
+                                </Button>
+                            </Link>
+                        </motion.div>
+                        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                            <Link href="/extensions">
+                                <Button variant="ghost" size="lg" className="min-w-[200px]">
+                                    Browse Extensions
+                                </Button>
+                            </Link>
+                        </motion.div>
                     </div>
 
                     {/* Stats row */}
                     <div className="flex flex-wrap justify-center gap-8 text-center">
-                        <div>
-                            <div className="text-3xl font-bold text-cyan">5,000+</div>
-                            <div className="text-sm text-gray-500">Active Hunters</div>
-                        </div>
+                        <motion.div
+                            whileHover={{ scale: 1.1, y: -5 }}
+                            transition={{ duration: 0.3 }}
+                            className="group"
+                        >
+                            <motion.div
+                                className="text-3xl font-bold text-cyan"
+                                animate={{ textShadow: ["0 0 20px rgba(0,255,255,0.3)", "0 0 40px rgba(0,255,255,0.6)", "0 0 20px rgba(0,255,255,0.3)"] }}
+                                transition={{ duration: 3, repeat: Infinity }}
+                            >
+                                5,000+
+                            </motion.div>
+                            <div className="text-sm text-gray-500 group-hover:text-cyan transition-colors">Active Hunters</div>
+                        </motion.div>
                         <div className="w-px bg-border" />
-                        <div>
-                            <div className="text-3xl font-bold text-purple">$2.5M+</div>
-                            <div className="text-sm text-gray-500">Bounties Found</div>
-                        </div>
+                        <motion.div
+                            whileHover={{ scale: 1.1, y: -5 }}
+                            transition={{ duration: 0.3 }}
+                            className="group"
+                        >
+                            <motion.div
+                                className="text-3xl font-bold text-purple"
+                                animate={{ textShadow: ["0 0 20px rgba(139,92,246,0.3)", "0 0 40px rgba(139,92,246,0.6)", "0 0 20px rgba(139,92,246,0.3)"] }}
+                                transition={{ duration: 3, repeat: Infinity, delay: 1 }}
+                            >
+                                $2.5M+
+                            </motion.div>
+                            <div className="text-sm text-gray-500 group-hover:text-purple transition-colors">Bounties Found</div>
+                        </motion.div>
                         <div className="w-px bg-border" />
-                        <div>
-                            <div className="text-3xl font-bold text-matrix">17</div>
-                            <div className="text-sm text-gray-500">Pro Extensions</div>
-                        </div>
+                        <motion.div
+                            whileHover={{ scale: 1.1, y: -5 }}
+                            transition={{ duration: 0.3 }}
+                            className="group"
+                        >
+                            <motion.div
+                                className="text-3xl font-bold text-matrix"
+                                animate={{ textShadow: ["0 0 20px rgba(0,255,65,0.3)", "0 0 40px rgba(0,255,65,0.6)", "0 0 20px rgba(0,255,65,0.3)"] }}
+                                transition={{ duration: 3, repeat: Infinity, delay: 2 }}
+                            >
+                                17
+                            </motion.div>
+                            <div className="text-sm text-gray-500 group-hover:text-matrix transition-colors">Pro Extensions</div>
+                        </motion.div>
                     </div>
                 </motion.div>
             </div>

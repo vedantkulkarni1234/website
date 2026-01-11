@@ -102,7 +102,7 @@ function Effects() {
     return (
         <EffectComposer>
             <Bloom
-                intensity={0.5}
+                intensity={0.6}
                 luminanceThreshold={0.2}
                 luminanceSmoothing={0.9}
                 mipmapBlur
@@ -136,9 +136,9 @@ export function HeroScene() {
                 <Suspense fallback={null}>
                     {/* Lighting */}
                     <ambientLight intensity={0.2} />
-                    <pointLight position={[10, 10, 10]} intensity={0.5} color="#00ffff" />
-                    <pointLight position={[-10, -10, 5]} intensity={0.3} color="#8b5cf6" />
-                    <pointLight position={[0, -5, 5]} intensity={0.2} color="#00ff41" />
+                    <pointLight position={[10, 10, 10]} intensity={0.6} color="#00ffff" />
+                    <pointLight position={[-10, -10, 5]} intensity={0.4} color="#8b5cf6" />
+                    <pointLight position={[0, -5, 5]} intensity={0.3} color="#00ff41" />
 
                     {/* Background */}
                     <Stars
